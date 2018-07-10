@@ -1,0 +1,9 @@
+<h1>수정하기</h1>
+<%= form_tag("/works/#{@work.id}", method: "put") do%>
+<!--form 내용물 : input 등등-->
+    제 목 : <%=text_field_tag(:title, @work.title)%><br>
+    설 명 : <%=text_field_tag(:desc, @work.desc)%><br>
+    이미지 : <%=text_field_tag(:image, @work.image)%><br>
+    메이커 : <%=text_field_tag(:maker_id, @work.maker_id)%><br>
+    <%=submit_tag("작품 수정하기")%>
+<%end%>

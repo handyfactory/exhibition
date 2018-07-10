@@ -1,0 +1,18 @@
+<h1>메이커 명단</h1>
+<p>Find me in app/views/makers/index.html.erb</p>
+<%=link_to '작가 등록', new_maker_path%>
+
+<table>
+    <tr>
+        <th>이름</th>
+        <th>설명</th>
+    </tr>
+    <%@makers.each do |m| %>
+        <tr>
+            <td><%=m.name%></td>
+            <td><%=link_to '상세보기', "/makers/#{m.id}"%></td>
+            <td><%=link_to '수정', "/makers/#{m.id}/edit"%></td>
+            <td><%=link_to '지우기', "/makers/#{m.id}", method: "delete", data: {confirm: "ㄹㅇ?"} %></td>
+        </tr>
+    <% end %>
+</table>

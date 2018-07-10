@@ -1,0 +1,7 @@
+<h1>수정하기</h1>
+<%= form_tag("/makers/#{@maker.id}", method: "put") do %>
+    이 름 : <%=text_field_tag(:name, @maker.name)%><br>
+    전화번호 : <%=text_field_tag(:phone_number, @maker.phone_number)%><br>
+    이메일 : <%=email_field_tag(:email, @maker.email)%><br>
+    <%=submit_tag("작가수정")%><br>
+<%end%>
