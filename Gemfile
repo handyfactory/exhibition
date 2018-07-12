@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'devise-i18n'
+gem 'devise'
 gem 'carrierwave', '~> 1.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'

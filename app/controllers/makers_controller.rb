@@ -1,4 +1,5 @@
 class MakersController < ApplicationController
+  before_action :authenticate_user!
   def index
     @makers = Maker.all
   end
@@ -12,7 +13,12 @@ class MakersController < ApplicationController
       phone_number: params[:phone_number],
       email: params[:email]
       )
-      maker.save
+      if maker.save #세이브 되는 순간 유효성 검사로 돌입, 실패하면 저장 안해
+        redirect_to "/makers/#{maker.id}"
+      else
+        flash[:msg] = "제목 혹은 내용이 비어있으면 안돼요"
+        redirect_to new_maker_path
+      end
   end
 
   def show

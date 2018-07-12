@@ -1,0 +1,23 @@
+<h1>회원정보</h1>
+<!--회원정보, 이메일과 등급 여부를 전부 알려줘, 테이블로-->
+
+<table>
+    <tr>
+        <th>회원이메일</th>
+        <th>역할</th>
+        <th>로그인 횟수</th>
+        <th>로그인 시간</th>
+        <th>로그인 ip</th>
+    </tr>
+    
+    <%@users.each do |u|%>
+    <tr>
+        <td><%=u.email%></td>
+        <td><%=u.is_admin? ? "관리자" : "양민" %></td>
+        <td><%=u.sign_in_count%></td>
+        <td><%=u.last_sign_in_at%></td>
+        <td><%=u.last_sign_in_ip%></td>
+        <td><%=link_to "역할바꾸기", "/admin/users/#{u.id}/change", data: {confirm: "레알?"}%></td>
+    </tr>
+   <%end%>
+</table>

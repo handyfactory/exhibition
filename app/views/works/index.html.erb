@@ -1,25 +1,48 @@
-<h1>3D printer 작품 전시회</h1>
-<!-- 새로운 작품을 업로드 할 수 있는 페이지-->
+<main role="main">
 
-<%= link_to '새 작품 올리기', new_work_path %>
-<!--현재 저장된 새로운 작품들을 보여준다-->
-<%= link_to '작가페이지', makers_path %>
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">3D 프린팅 전시회</h1>
+      <p class="lead text-muted">멀티캠퍼스 4차산업 인력양성 3D 프린터반 최종 프로젝트</p>
+      <p>
+      <%if user_signed_in? and current_user.is_admin? %>
+        <%= link_to '새 작품 올리기', new_work_path , class: "btn btn-primary my-2" %>
+        <%=link_to '작가 등록', new_maker_path, class: "btn btn-primary my-2" %>
+        <%= link_to '작가페이지', makers_path, class: "btn btn-primary my-2" %>
+        <%=link_to '관리자페이지', '/admin/users', class: "btn btn-secondary my-2" %>
+      <%end%>
+      </p>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row">
+      <%@works.each do |w|%>
+        <div class="col-md-4">
+          <div class="card mb-4 box-shadow">
+            <img class="card-img-top" src="<%=w.image%>" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"><%=w.title%></h5>  
+              <p class="card-text"><%=w.desc%></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><%=link_to '상세보기', "/works/#{w.id}"%></button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><%=link_to '수정', "/works/#{w.id}/edit"%></button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary"><%=link_to '지우기', "/works/#{w.id}", method: "delete", data: {confirm: "ㄹㅇ?"}%></button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%end%>
+        </div>
+    </div>
+  </div>
+
+</main>
 
 
-
-<table>
-    <tr>
-        <th>제목</th>
-        <th>설명</th>
-    </tr>
-    <%@works.each do |w|%>
-    <tr>
-        <td><%=w.title%></td>
-        <td><%=w.desc%></td>
-        <td><%=link_to '상세보기', "/works/#{w.id}"%></td>
-        <td><%=link_to '수정', "/works/#{w.id}/edit"%></td>
-        <td><%=link_to '지우기', "/works/#{w.id}", method: "delete", data: {confirm: "ㄹㅇ?"}%></td>
-    </tr>
-<%end%>
-</table>
 

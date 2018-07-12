@@ -1,4 +1,6 @@
 class WorksController < ApplicationController
+  before_action :authenticate_user!, except: [:index]
+  
   def index
     @works= Work.all
   end
@@ -27,7 +29,12 @@ class WorksController < ApplicationController
       image: params[:image],
       maker_id: params[:maker_id]
       )
-      work.save
+      if work.save #세이브 되는 순간 유효성 검사로 돌입, 실패하면 저장 안해
+        redirect_to "/works/#{work.id}"
+      else
+        flash[:msg] = "제목 혹은 내용이 비어있으면 안돼요"
+        redirect_to new_work_path
+      end
   end
 
   def edit
